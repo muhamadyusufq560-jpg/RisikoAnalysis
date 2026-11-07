@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOP Risk Analyzer</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 32px 20px;
+      background: #0b1120;
+      color: #e5e7eb;
+      font-family: Arial, sans-serif;
+    }
+
+    main {
+      max-width: 760px;
+      margin: auto;
+    }
+
+    h1 {
+      color: #60a5fa;
+    }
+
+    p {
+      color: #9ca3af;
+      line-height: 1.6;
+    }
+
+    .panel {
+      margin-top: 24px;
+      padding: 24px;
+      background: #151e30;
+      border: 1px solid #29364b;
+      border-radius: 14px;
+    }
+
+    label {
+      display: block;
+      margin: 18px 0 8px;
+      font-weight: bold;
+    }
+
+    textarea, select, button {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      font: inherit;
+    }
+
+    textarea, select {
+      background: #0b1120;
+      border: 1px solid #374151;
+      color: white;
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    button {
+      margin-top: 20px;
+      background: #2563eb;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    #hasil {
+      white-space: pre-wrap;
+      line-height: 1.7;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>SOP Risk Analyzer</h1>
+    <p>
+      Analisis awal kesesuaian SOP dengan kondisi aktual
+      dan identifikasi potensi risiko.
+    </p>
+
+    <section class="panel">
+      <h2>Input Analisis</h2>
+
+      <label for="sop">Poin SOP</label>
+      <textarea id="sop"
+        placeholder="Masukkan ketentuan SOP..."></textarea>
+
+      <label for="aktual">Kondisi Aktual</label>
+      <textarea id="aktual"
+        placeholder="Jelaskan kondisi yang terjadi..."></textarea>
+
+      <label for="dampak">Dampak Potensial</label>
+      <select id="dampak">
+        <option value="rendah">Rendah</option>
+        <option value="sedang">Sedang</option>
+        <option value="tinggi">Tinggi</option>
+        <option value="kritis">Kritis</option>
+      </select>
+
+      <button onclick="analisisRisiko()">
+        Analisis Risiko
+      </button>
+    </section>
+
+    <section class="panel" aria-live="polite">
+      <h2>Hasil Analisis</h2>
+      <p id="hasil">
+        Hasil analisis akan ditampilkan di sini.
+      </p>
+    </section>
+  </main>
+
+  <script>
+    function analisisRisiko() {
+      const sop = document.getElementById("sop").value.trim();
+      const aktual = document.getElementById("aktual").value.trim();
+      const dampak = document.getElementById("dampak").value;
+
+      const hasil = document.getElementById("hasil");
+
+      if (!sop || !aktual) {
+        hasil.textContent =
+          "Mohon isi poin SOP dan kondisi aktual terlebih dahulu.";
+        return;
+      }
+
+      hasil.textContent =
+        "POIN SOP:\n" + sop +
+        "\n\nKONDISI AKTUAL:\n" + aktual +
+        "\n\nTINGKAT DAMPAK YANG DIPILIH: " +
+        dampak.toUpperCase() +
+        "\n\nSTATUS: Perlu ditinjau lebih lanjut." +
+        "\n\nCatatan: Ini merupakan pencatatan awal, " +
+        "belum merupakan kesimpulan pelanggaran SOP.";
+    }
+  </script>
+</body>
+</html>
